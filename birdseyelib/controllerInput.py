@@ -3,7 +3,7 @@ class ControllerInput:
     def __init__(self, client) -> None:
         self.client = client
 
-    def set_controller_input(self, a=False, b=False, up=False, down=False, right=False, left=False):
+    def set_controller_input(self, a=False, b=False, x=False, y=False, up=False, down=False, right=False, left=False, start=False, select=False):
         """Sets the controller inputs to be executed in the emulator.
         All inputs are set to `False` be default.
         The inputs are executed until a new controller input is sent.
@@ -27,6 +27,8 @@ class ControllerInput:
         :type left: bool"""
         bool_to_string = {False : "false", True : "true"}
         controller_input = bool_to_string[a] + ";" + bool_to_string[b] + ";" + \
+                           bool_to_string[x] + ";" + bool_to_string[y] + ";" + \
                            bool_to_string[up] + ";" + bool_to_string[down] + ";" + \
-                           bool_to_string[right] + ";" + bool_to_string[left]
+                           bool_to_string[right] + ";" + bool_to_string[left] + ";" +\
+                           bool_to_string[start] + ";" + bool_to_string[select]
         self.client._queue_request("INPUT;" + controller_input + "\n")

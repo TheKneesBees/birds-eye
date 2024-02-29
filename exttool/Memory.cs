@@ -19,11 +19,6 @@ namespace BirdsEye {
         /// Precondition: `address` represents a valid hexadecimal value.
         ///</summary>
         ///
-        
-        public List<String> ReadDomainList(ApiContainer APIs){
-            List<String> DomainList = (List<String>)APIs.Memory.GetMemoryDomainList();
-            return DomainList;
-        }
         private void AddAddress(long address) {
             _log.Write(0, $"Adding address {address} to address list.");
             _addressList.Add(address);
@@ -80,6 +75,39 @@ namespace BirdsEye {
             _log.Write(0, "Clearing address and memory lists.");
             _addressList.Clear();
             _memoryList.Clear();
+        }
+
+        /// <summary>
+        /// Returns the list of domains that memory is capable of reading
+        /// </summary>
+        /// <param name="APIs"></param>
+        /// <returns></returns>
+         public String ReadDomainList(ApiContainer APIs){
+            List<String> DomainList = (List<String>)APIs.Memory.GetMemoryDomainList();
+            
+            String Domains = String.Join(", ", DomainList.ToArray());
+            return Domains;
+        }
+
+        /// <summary>
+        /// Changes the domain that memory is reading from to MemDomain
+        /// </summary>
+        /// <param name="MemDomain"></param>
+        /// <param name="APIs"></param>
+        /// <returns></returns>
+        public bool UseMemoryDomain(String MemDomain, ApiContainer APIs){
+            bool DomainUse = APIs.Memory.UseMemoryDomain(MemDomain);
+            return DomainUse;
+        }
+
+        /// <summary>
+        /// Returns the domain that memory is reading from
+        /// </summary>
+        /// <param name="APIs"></param>
+        /// <returns></returns>
+        public String GetCurrentMemoryDomain(ApiContainer APIs){
+            String Domain = APIs.Memory.GetCurrentMemoryDomain();
+            return Domain;
         }
     }
 }

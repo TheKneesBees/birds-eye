@@ -52,9 +52,31 @@ class Memory:
         return self.received_memory.copy()
 
     def request_domains(self):
+        """Requests the domains the memory api can read from"""
         self.client._queue_request("MEMORY_DOMAINS;" + "\n")
     
     def get_memory_domains(self):
+        """Gets the list of domains for memory"""
         data = self.client._get_latest_response_data("MEMORY_DOMAINS")
         if data:
             return data
+        
+    def request_domain_change(self, domain):
+        """Requests that the memory api changes the domain to read from"""
+        self.client._queue_request("CHANGE_DOMAIN;" + domain  + ";\n")
+        
+    def get_request_domain_change(self):
+        """Gets the result of the domain change request
+        
+            This will return a boolean True of False depending on whether or not the
+            API changed to a valid memory domain"""
+        data = self.client._get_latest_response_data("CHANGE_DOMAIN")
+        if data and "rue" in data:
+            return True
+        return False
+    
+    def get_current_memory_domain(self):
+        """Returns the domain that the memory api is reading from"""
+        self.client._queue_request("CURRENT_DOMAIN;\n")
+        data = self.client._get_latest_response_data("CURRENT_DOMAIN")
+        return data

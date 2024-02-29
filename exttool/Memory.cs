@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-
+using System.Security.Cryptography.X509Certificates;
 using BizHawk.Client.Common;
 
 namespace BirdsEye {
@@ -18,6 +18,12 @@ namespace BirdsEye {
         /// An integer `-1` is added to `_memoryList`.<br/>
         /// Precondition: `address` represents a valid hexadecimal value.
         ///</summary>
+        ///
+        
+        public List<String> ReadDomainList(ApiContainer APIs){
+            List<String> DomainList = (List<String>)APIs.Memory.GetMemoryDomainList();
+            return DomainList;
+        }
         private void AddAddress(long address) {
             _log.Write(0, $"Adding address {address} to address list.");
             _addressList.Add(address);

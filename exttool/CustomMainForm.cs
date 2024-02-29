@@ -103,6 +103,8 @@ namespace BirdsEye {
                         } else {
                             DisableCommandeer();
                         }
+                    } else if (req.Tag == "MEMORY_DOMAINS"){
+                        response += "MEMORY_DOMAINS;" + _memory.ReadDomainList(APIs).ToString();
                     }
                 }
                 _server.SendMessage(response);

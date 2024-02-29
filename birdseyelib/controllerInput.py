@@ -14,6 +14,12 @@ class ControllerInput:
         :param b: The state of the B button.
         :type b: bool
 
+        :param x: The state of the X button on the control pad.
+        :type x: bool
+        
+        :param y: The state of the Y button on the control pad.
+        :type y: bool
+
         :param up: The state of the Up button on the control pad.
         :type up: bool
 
@@ -24,7 +30,13 @@ class ControllerInput:
         :type right: bool
 
         :param left: The state of the Left button on the control pad.
-        :type left: bool"""
+        :type left: bool
+
+        :param start: The state of the Start button on the control pad.
+        :type start: bool
+        
+        :param select: The state of the Select button on the control pad.
+        :type select: bool"""
         bool_to_string = {False : "false", True : "true"}
         controller_input = bool_to_string[a] + ";" + bool_to_string[b] + ";" + \
                            bool_to_string[x] + ";" + bool_to_string[y] + ";" + \

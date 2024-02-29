@@ -50,3 +50,11 @@ class Memory:
                 addr, val = temp[0], temp[1]
                 self.received_memory[hex(int(addr))] = int(val)
         return self.received_memory.copy()
+
+    def request_domains(self):
+        self.client._queue_request("MEMORY_DOMAINS;" + "\n")
+    
+    def get_memory_domains(self):
+        data = self.client._get_latest_response_data("MEMORY_DOMAINS")
+        if data:
+            return data

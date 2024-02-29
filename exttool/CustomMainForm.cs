@@ -109,7 +109,20 @@ namespace BirdsEye {
                         response += "CHANGE_DOMAIN;" + _memory.UseMemoryDomain(req.Data.Trim(';'), APIs).ToString() + "\n";
                     } else if (req.Tag == "CURRENT_DOMAIN"){ //Gets which domain memory api is reading from
                         response += "CURRENT_DOMAIN;" + _memory.GetCurrentMemoryDomain(APIs) + "\n";
+                    } else if (req.Tag == "IRAM_MEMORY"){
+                        if (!string.IsNullOrEmpty(req.Data)) {
+                            _memory.AddAddressesFromString(req.Data);
+                        }
+                        _memory.ReadMemory(APIs);
+                         response += "IRAM_MEMORY;" + _memory.FormatMemory() + "\n";
+                    } else if (req.Tag == "BWRAM_MEMORY"){
+                        if (!string.IsNullOrEmpty(req.Data)) {
+                            _memory.AddAddressesFromString(req.Data);
+                        }
+                        _memory.ReadMemory(APIs);
+                         response += "BWRAM_MEMORY;" + _memory.FormatMemory() + "\n";
                     }
+
                 }
                 _server.SendMessage(response);
             } catch {

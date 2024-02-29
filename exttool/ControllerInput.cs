@@ -15,6 +15,7 @@ namespace BirdsEye {
         ///<summary>
         /// Execute the current input state in the emulator.
         ///</summary>
+
         public void ExecuteInput(ApiContainer APIs) {
             APIs.Joypad.Set(new Dictionary<string, bool>() {
                 {"A", _inputState[0]},

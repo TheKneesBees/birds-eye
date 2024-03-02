@@ -21,6 +21,7 @@ namespace BirdsEye {
         private readonly Memory _memory;
         private readonly ControllerInput _input;
         private readonly Emulation _emulation;
+        private readonly EmuClient _emuClient;
 
         private bool _commandeer = false;
 
@@ -38,6 +39,7 @@ namespace BirdsEye {
             _memory = new Memory(_log);
             _input = new ControllerInput(_log);
             _emulation = new Emulation(_log);
+            _emuClient = new EmuClient(_log);
 
             _commThread = new Thread(new ParameterizedThreadStart(_server.AcceptConnections));
             _commThread.Start(_config);
@@ -121,6 +123,10 @@ namespace BirdsEye {
                         }
                         _memory.ReadMemory(APIs);
                          response += "BWRAM_MEMORY;" + _memory.FormatMemory() + "\n";
+                    } else if (req.Tag == "SCREENSHOT"){
+                        if (!string.IsNullOrEmpty(req.Data)) {
+                            _emuClient.GetScreenshot(APIs, req.Data);
+                        }
                     }
 
                 }

@@ -5,7 +5,7 @@ using BizHawk.Client.Common;
 
 namespace BirdsEye {
     public class ControllerInput {
-        private readonly bool[] _inputState = {false, false, false, false, false, false, false, false, false, false};
+        private readonly bool[] _inputState = {false, false, false, false, false, false, false, false, false, false, false, false};
         private readonly Logging _log;
 
         public ControllerInput(Logging log) {
@@ -22,12 +22,14 @@ namespace BirdsEye {
                 {"B", _inputState[1]},
                 {"X", _inputState[2]},
                 {"Y", _inputState[3]},
-                {"Up", _inputState[4]},
-                {"Down", _inputState[5]},
-                {"Right", _inputState[6]},
-                {"Left", _inputState[7]},
-                {"Start", _inputState[8]},
-                {"Select", _inputState[9]}
+                {"L", _inputState[4]},
+                {"R", _inputState[5]},
+                {"Up", _inputState[6]},
+                {"Down", _inputState[7]},
+                {"Right", _inputState[8]},
+                {"Left", _inputState[9]},
+                {"Start", _inputState[10]},
+                {"Select", _inputState[11]}
             }, 1);
         }
 
@@ -37,7 +39,7 @@ namespace BirdsEye {
         ///</summary>
         public void SetInputFromString(string str) {
             string[] newState = str.Trim(';').Split(';');
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 12; i++) {
                 _inputState[i] = Convert.ToBoolean(newState[i]);
             }
         }

@@ -22,6 +22,8 @@ namespace BirdsEye {
         private readonly ControllerInput _input;
         private readonly Emulation _emulation;
         private readonly EmuClient _emuClient;
+        private readonly SaveState _saveState;
+        private readonly Joypad _joypad;
 
         private bool _commandeer = false;
 
@@ -40,6 +42,8 @@ namespace BirdsEye {
             _input = new ControllerInput(_log);
             _emulation = new Emulation(_log);
             _emuClient = new EmuClient(_log);
+            _saveState = new SaveState(_log);
+            _joypad = new Joypad(_log);
 
             _commThread = new Thread(new ParameterizedThreadStart(_server.AcceptConnections));
             _commThread.Start(_config);
@@ -127,6 +131,10 @@ namespace BirdsEye {
                         if (!string.IsNullOrEmpty(req.Data)) {
                             _emuClient.GetScreenshot(APIs, req.Data);
                         }
+                    } else if (req.Tag=="LOADSLOT"){
+                       response += "LOADSLOT;" + _saveState.LoadSlot(APIs, req.Data).ToString() + "\n";
+                    } else if (req.Tag=="PRESSKEY"){
+                        _joypad.pressKey(APIs, req.Data);
                     }
 
                 }

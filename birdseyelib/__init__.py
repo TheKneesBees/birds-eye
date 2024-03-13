@@ -4,3 +4,5 @@ from birdseyelib.controllerInput import ControllerInput
 from birdseyelib.emulation import Emulation
 from birdseyelib.externalTool import ExternalTool
 from birdseyelib.emuClient import EmuClient
+from birdseyelib.saveState import SaveState
+from birdseyelib.joypad import Joypad

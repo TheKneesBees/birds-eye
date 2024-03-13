@@ -11,3 +11,6 @@ class EmuClient:
             self.path = path
         
         self.client._queue_request("SCREENSHOT;" + self.path + "\n")
+
+    def LoadState(self, name):
+        self.client._queue_request("LOADSTATE;" + name +"\n")

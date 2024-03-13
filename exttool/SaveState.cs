@@ -4,11 +4,11 @@ using System.Security.Cryptography.X509Certificates;
 using BizHawk.Client.Common;
 
 namespace BirdsEye {
-    public class EmuClient{
+    public class SaveState{
 
 
         private readonly Logging _log;
-        public EmuClient(Logging log){
+        public SaveState(Logging log){
             _log = log;
         }
 
@@ -16,8 +16,9 @@ namespace BirdsEye {
             APIs.EmuClient.Screenshot(path);
         }
 
-        public bool LoadState(ApiContainer APIs, String name){
-           return APIs.EmuClient.LoadState(name);
+        public bool LoadSlot(ApiContainer APIs, String slot){
+            int saveSlot = Int32.Parse(slot); 
+            return APIs.SaveState.LoadSlot(saveSlot);
         }
     }
 }
